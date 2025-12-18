@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Love Birthday Letter</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  font-family:'Times New Roman',serif;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center; /* GITNA NA */
+  background:radial-gradient(circle,#e7d9c4,#c8b59b);
+}
+
+
+
+/* CONTAINER */
+.container{
+  position:relative;
+  width:520px;
+}
+
+/* SIDE PHOTOS */
+.side{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  z-index:1;
+}
+.side.left{left:-140px;}
+.side.right{right:-140px;}
+
+.side img{
+  width:110px;
+  height:140px;
+  object-fit:cover;
+  background:#fff;
+  padding:5px;
+  border-radius:6px;
+  box-shadow:0 10px 22px rgba(0,0,0,.4);
+  filter:sepia(30%);
+}
+
+/* ENVELOPE */
+.envelope{
+  position:relative;
+  width:100%;
+  height:360px;
+  background:linear-gradient(135deg,#efe3c8,#d8c7a1);
+  border-radius:10px;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.15),
+             0 25px 45px rgba(0,0,0,.35);
+  overflow:hidden;
+  z-index:3;
+}
+
+/* FLAP */
+.flap{
+  position:absolute;
+  top:0;
+  width:100%;
+  height:52%;
+  background:linear-gradient(135deg,#e8d7b3,#cdb48b);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top;
+  transition:transform 1.4s ease;
+  z-index:6;
+}
+
+/* SEAL */
+.seal{
+  position:absolute;
+  top:52%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:58px;
+  height:58px;
+  background:radial-gradient(circle at 30% 30%,#b32020,#6e0f0f);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#f8e6c0;
+  font-size:20px;
+  cursor:pointer;
+  z-index:7;
+  box-shadow:inset 0 4px 8px rgba(255,255,255,.3),
+             inset 0 -6px 10px rgba(0,0,0,.5),
+             0 6px 12px rgba(0,0,0,.5);
+}
+
+/* LETTER PAPER (VERY LONG & FULLY VISIBLE) */
+/* LETTER PAPER (FULLY VISIBLE, NO SCROLL) */
+/* LETTER PAPER (SCROLLABLE VINTAGE STYLE) */
+.letter{
+  position:absolute;
+  left:30px;
+  width:calc(100% - 60px);
+  max-height:75vh;       /* scrollable */
+  overflow-y:auto;       /* enable scrolling */
+  bottom:-1800px;
+  background: #fdf4e3;  /* light parchment color */
+  background-image: url('parchment-texture.jpg'); /* optional vintage texture */
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding:70px 60px 90px;
+  border-radius:6px;
+  border: 2px solid #e3d5b7; /* subtle old-paper border */
+  box-shadow: inset 0 0 25px rgba(120,80,40,.18),
+              0 30px 55px rgba(0,0,0,.35);
+  opacity:0;
+  transition: bottom 2.2s ease, opacity 1.2s ease;
+  z-index:4;
+}
+
+/* Scrollbar styling (vintage look) */
+.letter::-webkit-scrollbar {
+  width: 8px;
+}
+
+.letter::-webkit-scrollbar-track {
+  background: #f3e6d0; 
+  border-radius: 4px;
+}
+
+.letter::-webkit-scrollbar-thumb {
+  background-color: #c8b59b;
+  border-radius: 4px;
+  border: 2px solid #f3e6d0;
+}
+
+
+
+.letter p{
+  font-size:17px;
+  line-height:2;
+  color:#3a2b1a;
+}
+
+/* PHOTOS INSIDE LETTER */
+.letter-photos{
+  position:relative;
+  height:260px;
+  margin:40px 0 50px;
+}
+.letter-photos img{
+  position:absolute;
+  width:140px;
+  height:180px;
+  object-fit:cover;
+  background:#fff;
+  padding:5px;
+  border-radius:6px;
+  box-shadow:0 12px 26px rgba(0,0,0,.35);
+  filter:sepia(30%);
+}
+.letter-photos img:nth-child(1){
+  top:10px; left:30px; transform:rotate(-6deg);
+}
+.letter-photos img:nth-child(2){
+  top:40px; right:40px; transform:rotate(5deg);
+}
+.letter-photos img:nth-child(3){
+  bottom:0; left:160px; transform:rotate(-2deg);
+}
+
+/* OPEN STATE */
+.open .flap{
+  transform:rotateX(180deg);
+}
+.open .seal{
+  opacity:0;
+  pointer-events:none;
+}
+.open .letter{
+  bottom:-200px;
+  opacity:1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" onclick="openEnvelope()">
+
+  <!-- SIDE PHOTOS (DINAGDAG LANG) -->
+  <div class="side left">
+    <img src="../images/biach.jpg">
+    <img src="../images/vage.jpg">
+    <img src="../images/ituc.jpg">
+  </div>
+
+  <div class="side right">
+    <img src="../images/pol.jpg">
+    <img src="../images/gorgos.jpg">
+    <img src="../images/nguso.jpg">
+  </div>
+
+  <!-- ENVELOPE -->
+  <div class="envelope">
+    <div class="flap"></div>
+    <div class="seal">❤</div>
+
+    <!-- LETTER -->
+    <div class="letter">
+
+  <div class="letter-photos">
+    <img src="../images/duo3.jpg">
+    <img src="../images/yow.jpg">
+    <img src="../images/duo.jpg">
+  </div>
+
+  <p>
+    Hi loveeee,<br><br> Happy happy birthdayyyy, my gorgeous baby girl! 🎉💕<br><br>
+    Love, 19 ka na kainis naabutan mo na ako 😡😡. Gusto ko lang malaman mo na andito lang ako lagi, and I love you so so so so much, mahal ko. Never magbabago yung love ko sa’yo from the very start hanggang ngayon, ganun pa rin kita kamahal, kahit may nagawa tayong mali sa past. Pero wala na yun, past is past. I want to focus sa atin at sa future, kaya I promise I will treat you better, yung deserve mo.<br><br>
+    Sorry mahal kasi ito lang muna yung maibibigay ko ngayon, kasi wala pa talaga. Pero I promise, kapag nagkaroon ako, babawi ako sayo. At in the future, kapag successful na tayo, mabibili na natin yung mga gusto natin, dun tayo magbabawi sa isa’t isa.<br><br>
+    Happy happy birthday again, mahalll! I wuvv youuu so so so so so muchhhh. Hope you like it! 💖
+  </p>
+
+  <p style="text-align:right;margin-top:70px;">
+    — Gwapong mong BF
+  </p>
+
+</div>
+
+  </div>
+</div>
+
+<script>
+function openEnvelope(){
+  document.querySelector('.container').classList.add('open');
+}
+
+/* RANDOM SIDE PHOTO ROTATION */
+document.querySelectorAll('.side img').forEach(img=>{
+  const r=Math.random()*16-8;
+  const x=Math.random()*10-5;
+  const y=Math.random()*10-5;
+  img.style.transform=`rotate(${r}deg) translate(${x}px,${y}px)`;
+});
+</script>
+
+</body>
+</html>
